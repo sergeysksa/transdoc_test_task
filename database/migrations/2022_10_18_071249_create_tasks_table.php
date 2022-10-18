@@ -14,11 +14,12 @@ return new class extends Migration
             $table->string('name');
             $table->tinyText('description')->nullable();
             $table->string('severity');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

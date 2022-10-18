@@ -13,7 +13,9 @@ class TasksSeeder extends Seeder
     {
         User::all()->each(function($user) {
             $user->tasks()
-                ->saveMany( Task::factory(4)->create() );
+                ->saveMany( Task::factory(4)->create([
+                    'user_id' => $user->id
+                ]) );
         });
     }
 }
