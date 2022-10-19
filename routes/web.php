@@ -18,7 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('layouts.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('auth-check', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'authCheck']);
+
+Route::get('/{any?}', static function (){
+    return view('layouts.dashboard');
+})->where('eny','.*');
 
 require __DIR__.'/auth.php';
