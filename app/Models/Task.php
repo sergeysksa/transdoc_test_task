@@ -34,6 +34,7 @@ class Task extends Model
         'name',
         'description',
         'severity',
+        'user_id',
     ];
 
 

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class TasksHistory extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'event_name',
+        'user_id',
+        'task_id',
+    ];
 }
