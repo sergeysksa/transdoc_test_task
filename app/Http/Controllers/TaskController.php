@@ -14,17 +14,15 @@ class TaskController extends Controller
     }
 
 
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        return response()->json([
+            'result' => Task::query()
+                ->select('id', 'name')
+                ->where('user_id', auth()->user()->id)
+                ->get()
+        ]);
     }
-
-
-    public function create()
-    {
-        //
-    }
-
 
     public function store(Request $request)
     {
@@ -80,5 +78,12 @@ class TaskController extends Controller
         $task->delete();
 
         return response()->json('Task removed!');
+    }
+
+    public function getSeverityList()
+    {
+        return response()->json([
+           'result' => Task::TASK_SEVERITIES
+        ]);
     }
 }

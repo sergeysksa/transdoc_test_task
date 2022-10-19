@@ -1,19 +1,12 @@
 <template>
     <div>
         <h1>Dashboard</h1>
+        <tasks />
     </div>
 </template>
 
 <script setup>
-import {computed, onMounted} from "vue";
-import { useStore } from 'vuex'
-
-const store = useStore()
-onMounted(() => {
-    store.dispatch('dashboard/getUserData')
-})
-const userData = computed(() => store.state.dashboard.user)
-
+import Tasks from '@/components/tasks/tasksList'
 </script>
 
 <style scoped>

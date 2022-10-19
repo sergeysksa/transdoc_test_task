@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TaskController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(static function (){
+    Route::get('task-severities-list', [TaskController::class, 'getSeverityList']);
     Route::apiResources([
-        'task' => \App\Http\Controllers\TaskController::class
+        'task' => TaskController::class
     ]);
 });
