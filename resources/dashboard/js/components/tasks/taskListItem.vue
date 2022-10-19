@@ -1,22 +1,21 @@
 <template>
-    <li class="d-flex list-group-item list-group-item-action cursor-pointer justify-content-between align-content-center">
+    <li
+        @click="viewTask(taskItem.id)"
+        class="d-flex list-group-item list-group-item-action cursor-pointer">
         <span>{{taskItem.name}}</span>
-        <span
-            @click="removeTask(taskItem.id)"
-             class="ml-2 remove-icon"
-            >
-            x
-        </span>
     </li>
 </template>
 
 <script setup>
 import {defineProps} from 'vue'
+import router from "@/router/router";
 
 defineProps({
     taskItem: {},
 })
-const removeTask = (taskId) => console.log(taskId)
+
+const viewTask = (taskId) => router.push({name: 'taskEdit', params:{id: taskId}})
+
 </script>
 
 <style scoped lang="scss">

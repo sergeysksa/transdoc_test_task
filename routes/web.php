@@ -23,8 +23,8 @@ Route::get('/dashboard', function () {
 
 Route::get('auth-check', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'authCheck']);
 
-Route::get('/{any?}', static function (){
-    return view('layouts.dashboard');
-})->where('eny','.*');
+//Route::get('/{any?}/{any?}/{any?}', static function (){
+//    return view('layouts.dashboard');
+//})->where('eny','.*');
 
 require __DIR__.'/auth.php';

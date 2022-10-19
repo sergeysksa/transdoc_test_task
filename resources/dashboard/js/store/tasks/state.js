@@ -1,5 +1,7 @@
 export default () => ({
     tasks: [],
     task: {},
-    severityList: []
+    severityList: [],
+    taskFormErrors: [],
+    successMessage: ''
 })

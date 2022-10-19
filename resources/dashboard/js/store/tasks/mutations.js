@@ -7,5 +7,11 @@ export default {
     },
     setSeverityList(state, data) {
         state.severityList = data
+    },
+    setSuccessMessage(state, data) {
+        state.successMessage = data
+    },
+    setErrorsMessage(state, data) {
+        state.taskFormErrors = data
     }
 }

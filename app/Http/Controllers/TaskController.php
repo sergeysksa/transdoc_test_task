@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskCreateUpdateRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -24,9 +25,17 @@ class TaskController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+
+    public function store(TaskCreateUpdateRequest $request): JsonResponse
     {
-        //
+        $taskData =  [
+            ...$request->validated(),
+            'user_id' => auth()->user()->id
+        ];
+
+        Task::create($taskData);
+
+        return response()->json(['message' => 'Task created']);
     }
 
     /**
@@ -42,26 +51,15 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param TaskCreateUpdateRequest $request
+     * @param $id
+     * @return JsonResponse
      */
-    public function edit($id)
+    public function update(TaskCreateUpdateRequest $request, $id): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        Task::where('id', $id)
+            ->update($request->validated());
+        return response()->json(['message' => 'Task updated']);
     }
 
     /**
@@ -77,10 +75,11 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return response()->json('Task removed!');
+        return response()->json(['message' => 'Task removed!']);
     }
 
-    public function getSeverityList()
+
+    public function getSeverityList(): JsonResponse
     {
         return response()->json([
            'result' => Task::TASK_SEVERITIES
