@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskCreateUpdateRequest;
 use App\Models\Task;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-
     }
 
 
@@ -57,7 +55,7 @@ class TaskController extends Controller
      */
     public function update(TaskCreateUpdateRequest $request, $id): JsonResponse
     {
-        Task::where('id', $id)
+        Task::query()->where('id', $id)
             ->update($request->validated());
         return response()->json(['message' => 'Task updated']);
     }
