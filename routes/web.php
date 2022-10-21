@@ -16,15 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('layouts.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+Route::middleware('auth:sanctum')->group(static function () {
+    Route::prefix('dashboard')->group(static function () {
+        Route::get('/{any?}', static function (){
+            return view('layouts.dashboard');
+        })->where('any','.*')->name('dashboard');
+    });
+});
 Route::get('auth-check', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'authCheck']);
-
-//Route::get('/{any?}/{any?}/{any?}', static function (){
-//    return view('layouts.dashboard');
-//})->where('eny','.*');
 
 require __DIR__.'/auth.php';
