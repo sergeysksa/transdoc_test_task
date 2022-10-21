@@ -83,7 +83,7 @@ return [
     */
 
     'locale' => 'en',
-
+    'api_version'  => '1',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

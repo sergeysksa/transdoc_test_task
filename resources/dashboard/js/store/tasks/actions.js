@@ -9,6 +9,10 @@ export default {
    async getUserTasks(store) {
        const {data} = await axios.get('/api/task')
        store.commit('setTasks', data.result)
+       axios.get('/api/v1/get-user').then(resp => {
+           console.log( resp.data );
+       })
+
     },
     createTask(context, payload) {
         axios.post('/api/task', payload)
